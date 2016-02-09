@@ -74,7 +74,7 @@
             return !_.isEmpty(inVal) && _.isString(inVal);
         };
 
-        this.state_province = function(inVal) {
+        this.stateProvince = function(inVal) {
             return !_.isEmpty(inVal) &&
                 _.isString(inVal) &&
                 inVal.toUpperCase() === 'CA';
@@ -92,7 +92,7 @@
                 inVal.toUpperCase() === 'IT';
         };
 
-        this.phone = function(inVal, inCoutryCode) { //jshint unused:false
+        this.phoneNumber = function(inVal, inCoutryCode) { //jshint unused:false
             //TODO: validate mobile and landline phone numbers
             //		landline numbers prefix can be validated against the postal code phone prefix
             return !_.isEmpty(inVal) &&
