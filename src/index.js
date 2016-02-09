@@ -1,6 +1,5 @@
-'use strict';
-
 (function() {
+'use strict';
     var root = this;
     var previous_module = root.aeDataValidator;
 
@@ -113,6 +112,23 @@
                 inVal.toUpperCase() === '09047';
         };
 
+        this.address  = function(inAddress) {
+            _.isMatchWith( inAddress,
+                {
+                'first_name': this.nonEmptyString,
+                'last_name': this.nonEmptyString,
+                'company': this.nonEmptyString,
+                'street_1': this.nonEmptyString,
+                'street_2': _.isString,
+                'city': this.nonEmptyString,
+                'state': [inAddress.province, 'country_iso2'],
+                'zip': this.postalCode,
+                'country': this.country,
+                'country_iso2': this.countryCode,
+                'phone': [inAddress.phone, 'country_iso2'],
+                'email': this.email
+            }, matcher(inAddress));
+        };
     };
 
     aeModule.noConflict = function() {
