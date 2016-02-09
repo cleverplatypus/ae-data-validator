@@ -114,7 +114,7 @@
         this.postalCode = function(inVal, inCoutryCode) {
             return !_.isEmpty(inVal) &&
                 _.isString(inVal) &&
-                inVal.toUpperCase() === '09047';
+                /^\d{5}$/.test(inVal);
         };
 
         this.address  = function(inAddress) {
