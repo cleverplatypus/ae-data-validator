@@ -116,6 +116,10 @@
                 inVal.toUpperCase() === 'ITALY';
         };
 
+        this.re = function(inVal, inRe) {
+            return _.isRegExp(inRe) && inRe.test(inVal);
+        };
+
         this.countryCode = function(inVal) {
             return !_.isEmpty(inVal) &&
                 _.isString(inVal) &&
