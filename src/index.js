@@ -66,8 +66,14 @@
             return _.isArray(inObject) && inObject.length;
         };
 
-        this.companyTaxNumber = function(inVal, inCountryCode) { //jshint unused:false
-            return !_.isEmpty(inVal) && _.isNumber(inVal) && /^\d{11}$/.test(inVal.toString());
+        this.companyTaxNumber = function(inVal, inCountryCode) {
+            switch(inCountryCode.toUpperCase()) {
+                case 'IT':
+                    return !_.isEmpty(inVal) && !isNaN(inVal) && /^\d{11}$/.test(inVal.toString());
+                    break;
+                default:
+                    return false;
+            }
         };
 
         this.nonEmptyString = function(inVal) {
