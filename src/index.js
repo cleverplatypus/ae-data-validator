@@ -79,10 +79,15 @@
             return !_.isEmpty(inVal) && _.isString(inVal);
         };
 
-        this.stateProvince = function(inVal) {
-            return !_.isEmpty(inVal) &&
-                _.isString(inVal) &&
-                inVal.toUpperCase() === 'CA';
+        this.stateProvince = function(inVal, inCountryCode) {
+            switch(inCountryCode.toUpperCase()) {
+                case 'IT':
+                    return !_.isEmpty(inVal) &&
+                        _.isString(inVal) &&
+                        inVal.length == 2;
+                default:
+                    return false;
+            }
         };
 
         this.country = function(inVal) {
