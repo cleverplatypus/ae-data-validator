@@ -43,7 +43,7 @@
         return inVal.toString();
     };
 
-    var aeModule = function() { /*jshint ignore:line */ //suppresses 'weird construction error' supernew option not working
+    var aeModule = new (function() { /*jshint ignore:line */ //suppresses 'weird construction error' supernew option not working
         this.addPlugIn = function(inPlugIn) {
             var that = this;
             _.each(inPlugIn, function(inValidatorFn, inName) {
@@ -129,7 +129,7 @@
                 'email': this.email
             }, matcher(inAddress));
         };
-    };
+    })();
 
     aeModule.noConflict = function() {
         root.aeDataValidator = previous_module;
