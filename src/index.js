@@ -70,7 +70,6 @@
             switch(inCountryCode.toUpperCase()) {
                 case 'IT':
                     return !_.isEmpty(inVal) && !isNaN(inVal) && /^\d{11}$/.test(inVal.toString());
-                    break;
                 default:
                     return false;
             }
@@ -103,7 +102,7 @@
             //		landline numbers prefix can be validated against the postal code phone prefix
             return !_.isEmpty(inVal) &&
                 _.isString(inVal) &&
-                inVal.replace(/\s/g, '').match(/\+39\d+$/);
+                /\+39\d+$/.test(inVal.replace(/\s/g, ''));
         };
 
         this.email = function(inVal) {
