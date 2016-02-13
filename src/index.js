@@ -131,7 +131,7 @@
             //		landline numbers prefix can be validated against the postal code phone prefix
             return !_.isEmpty(inVal) &&
                 _.isString(inVal) &&
-                /\+39\d+$/.test(inVal.replace(/\s/g, ''));
+                /^(\+39)?\d{5}\d+$/.test(inVal.replace(/[^0-9\+]/g, ''));
         };
 
         this.email = function(inVal) {
