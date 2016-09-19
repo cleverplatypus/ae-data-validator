@@ -5,15 +5,16 @@
 
     var has_require = typeof require !== 'undefined';
 
-    var _ = root._;
+    var each = require('lodash.foreach');
+    var isFunction = require('lodash.isFunction');
+    var bind = require('lodash.bind');
+    var isArray = require('lodash.isArray');
+    var isEmpty = require('lodash.isEmpty');
+    var isString = require('lodash.isString');
+    var isRegExp = require('lodash.isRegExp');
+    var isMatchWith = require('lodash.isMatchWith');
 
-    if (typeof _ === 'undefined') {
-        if (has_require) {
-            _ = require('lodash');
-        } else {
-            throw new Error('aeDataValidator requires lodash');
-        }
-    }
+  
 
     var matcher = function(inBaseObject) {
         return function(inObjProp, inValidationSourceProp) {
@@ -46,11 +47,11 @@
     var aeModule = new (function() { /*jshint ignore:line */ //suppresses 'weird construction error' supernew option not working
         this.addPlugIn = function(inPlugIn) {
             var that = this;
-            _.each(inPlugIn, function(inValidatorFn, inName) {
-                if (_.isFunction(that[inName])) {
+            each(inPlugIn, function(inValidatorFn, inName) {
+                if (isFunction(that[inName])) {
                     console.warn('Overriding default validator with name: ' + inName);
                 }
-                that[inName] = _.bind(inValidatorFn, that);
+                that[inName] = bind(inValidatorFn, that);
             });
         };
 
@@ -63,27 +64,27 @@
         };
 
         this.nonEmptyArray = function nonEmptyArray(inObject) {
-            return _.isArray(inObject) && inObject.length;
+            return isArray(inObject) && inObject.length;
         };
 
         this.companyTaxNumber = function(inVal, inCountryCode) {
             switch(inCountryCode.toUpperCase()) {
                 case 'IT':
-                    return !_.isEmpty(inVal) && !isNaN(inVal) && /^\d{11}$/.test(inVal.toString());
+                    return !isEmpty(inVal) && !isNaN(inVal) && /^\d{11}$/.test(inVal.toString());
                 default:
                     return false;
             }
         };
 
         this.nonEmptyString = function(inVal) {
-            return !_.isEmpty(inVal) && _.isString(inVal);
+            return !isEmpty(inVal) && isString(inVal);
         };
 
         this.stateProvince = function(inVal, inCountryCode) {
             switch(inCountryCode.toUpperCase()) {
                 case 'IT':
-                    return !_.isEmpty(inVal) &&
-                        _.isString(inVal) &&
+                    return !isEmpty(inVal) &&
+                        isString(inVal) &&
                         inVal.length == 2;
                 default:
                     return false;
@@ -111,49 +112,49 @@
         };
 
         this.country = function(inVal) {
-            return !_.isEmpty(inVal) &&
-                _.isString(inVal) &&
+            return !isEmpty(inVal) &&
+                isString(inVal) &&
                 inVal.toUpperCase() === 'ITALY';
         };
 
         this.re = function(inVal, inRe) {
-            return _.isRegExp(inRe) && inRe.test(inVal);
+            return isRegExp(inRe) && inRe.test(inVal);
         };
 
         this.countryCode = function(inVal) {
-            return !_.isEmpty(inVal) &&
-                _.isString(inVal) &&
+            return !isEmpty(inVal) &&
+                isString(inVal) &&
                 inVal.toUpperCase() === 'IT';
         };
 
         this.phoneNumber = function(inVal, inCoutryCode) { //jshint unused:false
             //TODO: validate mobile and landline phone numbers
             //		landline numbers prefix can be validated against the postal code phone prefix
-            return !_.isEmpty(inVal) &&
-                _.isString(inVal) &&
+            return !isEmpty(inVal) &&
+                isString(inVal) &&
                 /^(\+39)?\d{5}\d+$/.test(inVal.replace(/[^0-9\+]/g, ''));
         };
 
         this.email = function(inVal) {
-            return !_.isEmpty(inVal) &&
-                _.isString(inVal) &&
+            return !isEmpty(inVal) &&
+                isString(inVal) &&
                 emailRE.test(inVal.toLowerCase());
         };
 
         this.postalCode = function(inVal, inCoutryCode) {
-            return !_.isEmpty(inVal) &&
-                _.isString(inVal) &&
+            return !isEmpty(inVal) &&
+                isString(inVal) &&
                 /^\d{5}$/.test(inVal);
         };
 
         this.address  = function(inAddress) {
-            _.isMatchWith( inAddress,
+            isMatchWith( inAddress,
                 {
                 'first_name': this.nonEmptyString,
                 'last_name': this.nonEmptyString,
                 'company': this.nonEmptyString,
                 'street_1': this.nonEmptyString,
-                'street_2': _.isString,
+                'street_2': isString,
                 'city': this.nonEmptyString,
                 'state': [inAddress.province, 'country_iso2'],
                 'zip': this.postalCode,

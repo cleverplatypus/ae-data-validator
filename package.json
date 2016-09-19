@@ -17,6 +17,14 @@
   },
   "homepage": "https://github.com/cleverplatypus/ae-data-validator",
   "dependencies": {
-    "lodash": "^4.3.0"
+    "lodash": "^4.3.0",
+    "lodash.bind": "^4.2.1",
+    "lodash.foreach": "^4.5.0",
+    "lodash.isarray": "^4.0.0",
+    "lodash.isempty": "^4.4.0",
+    "lodash.isfunction": "^3.0.8",
+    "lodash.ismatchwith": "^4.4.0",
+    "lodash.isregexp": "^4.0.1",
+    "lodash.isstring": "^4.0.1"
   }
 }
