@@ -6,13 +6,13 @@
     var has_require = typeof require !== 'undefined';
 
     var each = require('lodash.foreach');
-    var isFunction = require('lodash.isFunction');
+    var isFunction = require('lodash.isfunction');
     var bind = require('lodash.bind');
-    var isArray = require('lodash.isArray');
-    var isEmpty = require('lodash.isEmpty');
-    var isString = require('lodash.isString');
-    var isRegExp = require('lodash.isRegExp');
-    var isMatchWith = require('lodash.isMatchWith');
+    var isArray = require('lodash.isarray');
+    var isEmpty = require('lodash.isempty');
+    var isString = require('lodash.isstring');
+    var isRegExp = require('lodash.isregexp');
+    var isMatchWith = require('lodash.ismatchwith');
 
   
 
