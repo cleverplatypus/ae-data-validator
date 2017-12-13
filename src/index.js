@@ -68,7 +68,7 @@
         };
 
         this.companyTaxNumber = function(inVal, inCountryCode) {
-            switch(inCountryCode.toUpperCase()) {
+            switch((inCountryCode || '').toUpperCase()) {
                 case 'IT':
                     return !isEmpty(inVal) && !isNaN(inVal) && /^\d{11}$/.test(inVal.toString());
                 default:
@@ -81,7 +81,7 @@
         };
 
         this.stateProvince = function(inVal, inCountryCode) {
-            switch(inCountryCode.toUpperCase()) {
+            switch((inCountryCode || '').toUpperCase()) {
                 case 'IT':
                     return !isEmpty(inVal) &&
                         isString(inVal) &&
