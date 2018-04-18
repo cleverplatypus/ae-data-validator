@@ -57,12 +57,12 @@
 
         this.password = function password(inPassword) {
             return forceString(inPassword).length >= 8 &&
-                /^(\w|\d|[\.!@#\$%\^&\-+=,?]){8}((\w|\d|[\.!@#\$%\^&\-+=,?]))*?$/.test(inPassword) &&
+                /^(\w|\d|[\.!@#\$%\^&\-\*+=,?]){8}((\w|\d|[\.!@#\$%\*\^&\-+=,?]))*?$/.test(inPassword) &&
                 /\w/.test(inPassword) &&
                 /\d/.test(inPassword) &&
-                /[\.!@#\$%\^&\-+=,?]/.test(inPassword);
+                /[\.!@#\$%\^\*&\-+=,?_]/.test(inPassword);
         };
-
+        
         this.nonEmptyArray = function nonEmptyArray(inObject) {
             return isArray(inObject) && inObject.length;
         };
