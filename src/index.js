@@ -76,6 +76,15 @@
             }
         };
 
+        this.invoicingCode = function(inVal, inCountryCode) {
+            switch((inCountryCode || '').toUpperCase()) {
+                case 'IT':
+                    return !isEmpty(inVal) && /^[A-Za-z0-9]{6}[A-Za-z0-9]?$/.test(inVal.toString());
+                default:
+                    return true;
+            }
+        };
+
         this.nonEmptyString = function(inVal) {
             return !isEmpty(inVal) && isString(inVal);
         };
