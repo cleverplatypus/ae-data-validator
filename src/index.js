@@ -57,7 +57,7 @@
 
         this.password = function password(inPassword) {
             return forceString(inPassword).length >= 8 &&
-                /^(\w|\d|[\.!@#\$%\^&\-\*+=,?]){8}((\w|\d|[\.!@#\$%\*\^&\-+=,?]))*?$/.test(inPassword) &&
+                /^(.){8}.*$/.test(inPassword) &&
                 /\w/.test(inPassword) &&
                 /\d/.test(inPassword) &&
                 /[\.!@#\$%\^\*&\-+=,?_]/.test(inPassword);
